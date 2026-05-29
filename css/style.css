@@ -1,0 +1,221 @@
+/* ============================================================
+   MEJI FOODS — Global Styles
+   ============================================================ */
+
+:root {
+  --color-fire:    #E8421A;
+  --color-fire-dk: #c73515;
+  --color-gold:    #F5A41F;
+  --color-dark:    #1A1208;
+  --color-dark-2:  #2a1e0e;
+  --color-cream:   #FDF6EC;
+  --color-cream-2: #f5ead8;
+  --color-green:   #1F4A2C;
+  --color-green-2: #163821;
+  --color-text:    #3a2a1a;
+  --color-muted:   #7a6a58;
+  --color-border:  #e8d9c4;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  40px;
+
+  --shadow-sm:  0 2px 8px rgba(26,18,8,.08);
+  --shadow-md:  0 8px 32px rgba(26,18,8,.12);
+  --shadow-lg:  0 24px 64px rgba(26,18,8,.16);
+
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+  --transition-slow: 0.5s cubic-bezier(0.4,0,0.2,1);
+
+  --max-width: 1200px;
+  --gutter:    24px;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+input { font-family: var(--font-body); }
+
+/* ---- Layout ---- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- Typography ---- */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-dark);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-xl);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn--fire {
+  background: var(--color-fire);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(232,66,26,.35);
+}
+.btn--fire:hover {
+  background: var(--color-fire-dk);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232,66,26,.45);
+}
+.btn--fire:active { transform: translateY(0); }
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-dark);
+  border: 2px solid var(--color-dark);
+}
+.btn--outline:hover {
+  background: var(--color-dark);
+  color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.btn--outline-light {
+  background: transparent;
+  color: var(--color-cream);
+  border: 2px solid rgba(253,246,236,.5);
+}
+.btn--outline-light:hover {
+  background: rgba(253,246,236,.1);
+  border-color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.btn--lg { padding: 18px 36px; font-size: 1.05rem; }
+.btn--full { width: 100%; }
+
+/* ---- Section shared ---- */
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-fire);
+  margin-bottom: 12px;
+}
+.section-eyebrow--light { color: var(--color-gold); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-dark);
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  max-width: 560px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-header .section-sub { margin-inline: auto; }
+
+/* ---- Scroll animations ---- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+              transform 0.65s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Badges ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(26,18,8,.06);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+/* ---- Cart Badge ---- */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: var(--color-fire);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  animation: badge-pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes badge-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream-2); }
+::-webkit-scrollbar-thumb { background: var(--color-fire); border-radius: 3px; }
+
+/* ---- Focus styles ---- */
+:focus-visible {
+  outline: 2px solid var(--color-fire);
+  outline-offset: 3px;
+}
