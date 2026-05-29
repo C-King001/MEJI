@@ -7,7 +7,7 @@
   <meta name="description" content="Authentic West African Jollof Rice, ready in 90 seconds. No shortcuts on flavour. Stocked in Sainsbury's and available online." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
 </head>
@@ -62,44 +62,59 @@
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <div class="container hero__inner">
-      <div class="hero__content">
-        <div class="hero__eyebrow fade-up">West African Soul Food</div>
-        <h1 class="hero__headline fade-up">
-          Jollof Rice<br />
-          in <span class="hero__highlight">90 Seconds.</span><br />
-          No Shortcuts<br />on Flavour.
-        </h1>
-        <p class="hero__sub fade-up">The taste of home, for the life you actually live. Authentic West African cuisine — ready when you are.</p>
-        <div class="hero__ctas fade-up">
-          <a href="#products" class="btn btn--fire btn--lg">Shop Now</a>
-          <a href="#story" class="btn btn--outline btn--lg">Our Story</a>
-        </div>
-        <div class="hero__badges fade-up">
-          <span class="badge">✓ Vegetarian options</span>
-          <span class="badge">✓ No artificial colours</span>
-          <span class="badge">✓ Made in UK</span>
-        </div>
+  <!-- ===== HERO CAROUSEL ===== -->
+  <section class="hero-cx" id="home">
+
+    <!-- Grain texture -->
+    <div class="hero-cx__grain" aria-hidden="true"></div>
+
+    <!-- Floating background word -->
+    <div class="hero-cx__bg-word" aria-hidden="true">JOLLOF</div>
+
+    <!-- Product pack carousel stage -->
+    <div class="hero-cx__stage">
+      <div class="hero-cx__pack hero-cx__pack--center" data-index="0">
+        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/1.02464a56.png" alt="Classic Chicken Jollof" class="hero-cx__pack-img" draggable="false" />
       </div>
-      <div class="hero__visual fade-up">
-        <div class="hero__img-wrap">
-          <img
-            src="assets/images/The image of the jollof rice.jfif"
-            alt="Meji Foods Jollof Rice"
-            class="hero__product-img"
-          />
-          <div class="hero__float hero__float--1">⭐⭐⭐⭐⭐</div>
-          <div class="hero__float hero__float--2">140+ Stores</div>
-          <div class="hero__float hero__float--3">90 sec</div>
-        </div>
+      <div class="hero-cx__pack hero-cx__pack--right" data-index="1">
+        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/2.b977faab.png" alt="Fiery Hot Spicy Jollof" class="hero-cx__pack-img" draggable="false" />
+      </div>
+      <div class="hero-cx__pack hero-cx__pack--back" data-index="2">
+        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/3.4df853b4.png" alt="Authentic Vegan Jollof" class="hero-cx__pack-img" draggable="false" />
+      </div>
+      <div class="hero-cx__pack hero-cx__pack--left" data-index="3">
+        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/4.4457fbce.png" alt="Smoked Suya Jollof" class="hero-cx__pack-img" draggable="false" />
       </div>
     </div>
-    <div class="hero__scroll-hint">
-      <span>Scroll</span>
-      <svg width="16" height="24" viewBox="0 0 16 24"><rect x="5" y="4" width="6" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 17v3M6 19l2 2 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+
+    <!-- Bottom: info panel + CTA -->
+    <div class="hero-cx__bottom">
+
+      <div class="hero-cx__panel">
+        <div class="hero-cx__panel-top">
+          <h2 class="hero-cx__name">CLASSIC CHICKEN JOLLOF</h2>
+          <span class="hero-cx__price">£5.99</span>
+        </div>
+        <p class="hero-cx__desc">Rich, deeply smoky, and packed with traditional West African aromatics. Crafted with authentic seasonings—ready in 90 seconds flat.</p>
+        <div class="hero-cx__nav">
+          <button class="hero-cx__nav-btn" id="hero-prev" aria-label="Previous flavor">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="hero-cx__nav-btn" id="hero-next" aria-label="Next flavor">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-cx__cta-wrap">
+        <a href="#products" class="hero-cx__cta-btn">
+          SECURE YOUR PACK
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
     </div>
+
   </section>
 
   <!-- ===== AS SEEN IN ===== -->
