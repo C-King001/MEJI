@@ -62,7 +62,7 @@ function getCount(cart) {
   return cart.reduce((sum, i) => sum + i.qty, 0);
 }
 
-const FREE_SHIPPING_THRESHOLD = 25;
+const FREE_SHIPPING_THRESHOLD = 10;
 
 function updateShippingBar() {
   const cart     = loadCart();

@@ -6,8 +6,8 @@ const PRODUCTS_DATA = {
   'meji-jollof-chicken': {
     id:        'meji-jollof-chicken',
     name:      'Jollof Rice — Chicken',
-    price:     '5.99',
-    img:       'assets/images/Jollof flavor.jpeg',
+    price:     '2.10',
+    img:       'assets/product images/Jollof package.jpeg',
     desc:      'Smoky tomato richness with tender chicken and the unmistakable depth of authentic West African jollof. Crafted from a generations-old recipe. Ready in 90 seconds.',
     spice:     2,
     spiceName: 'Mild',
@@ -16,8 +16,8 @@ const PRODUCTS_DATA = {
   'meji-jollof-veg': {
     id:        'meji-jollof-veg',
     name:      'Jollof Rice — Vegetarian',
-    price:     '5.49',
-    img:       'assets/images/Spicy Flavor.webp',
+    price:     '2.10',
+    img:       'assets/product images/Spicy package.jpeg',
     desc:      'All the boldness of classic Jollof — smoky, rich, and deeply aromatic. 100% plant-based with zero compromise on that famous West African depth.',
     spice:     3,
     spiceName: 'Medium',
@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const HERO_FLAVORS = {
     classic: {
       name:    'CLASSIC CHICKEN JOLLOF',
-      price:   '£5.99',
+      price:   '£2.10',
       bgColor: '#6B1C0A',
       bgWord:  'JOLLOF',
       desc:    'Rich, deeply smoky, and packed with traditional West African aromatics. Crafted with authentic seasonings — ready in 90 seconds flat.',
     },
     spicy: {
       name:    'FIERY HOT SPICY JOLLOF',
-      price:   '£6.49',
+      price:   '£2.10',
       bgColor: '#8B1212',
       bgWord:  'SPICY',
       desc:    'Turn up the heat. Infused with genuine Scotch bonnet peppers and sharp native spices for an uncompromised, layered kick.',
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let bundleQtys = { 'bundle-chicken': 0, 'bundle-spicy': 0 };
   const BUNDLE_TARGET = 6;
-  const BUNDLE_PRICES = { 'bundle-chicken': 5.99, 'bundle-spicy': 5.49 };
+  const BUNDLE_PRICES = { 'bundle-chicken': 2.10, 'bundle-spicy': 2.10 };
   const BUNDLE_DISCOUNT = 0.15;
 
   function updateBundleUI() {
@@ -454,12 +454,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chickenQty > 0) {
       const existing = cart.find(i => i.id === 'meji-jollof-chicken');
       if (existing) existing.qty += chickenQty;
-      else cart.push({ id: 'meji-jollof-chicken', name: 'Meji Jollof Rice — Chicken', price: 5.99, qty: chickenQty });
+      else cart.push({ id: 'meji-jollof-chicken', name: 'Meji Jollof Rice — Chicken', price: 2.10, qty: chickenQty });
     }
     if (spicyQty > 0) {
       const existing = cart.find(i => i.id === 'meji-jollof-spicy');
       if (existing) existing.qty += spicyQty;
-      else cart.push({ id: 'meji-jollof-spicy', name: 'Meji Jollof Rice — Spicy', price: 5.49, qty: spicyQty });
+      else cart.push({ id: 'meji-jollof-spicy', name: 'Meji Jollof Rice — Spicy', price: 2.10, qty: spicyQty });
     }
     saveCart(cart);
     renderCart();

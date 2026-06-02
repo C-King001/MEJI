@@ -1322,7 +1322,7 @@
   pointer-events: none;
   user-select: none;
   display: block;
-  /* Transparent PNG — floats cleanly on the hero background */
+  border-radius: 16px;
 }
 
 /* === CLASSIC PACK === */
@@ -1600,17 +1600,22 @@
    STOCKISTS — real logos
    ============================================================ */
 .stockist-card__logo--img {
-  width: 120px;
-  height: 44px;
+  width: 140px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #1a1208;
+  border-radius: 10px;
+  padding: 8px 12px;
 }
 .stockist-card__logo--img img {
   max-width: 100%;
-  max-height: 44px;
+  max-height: 36px;
   object-fit: contain;
   display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
 }
 
 
@@ -1950,8 +1955,8 @@
 .bundle__product-img {
   width: 64px;
   height: 64px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
+  object-fit: cover;
+  border-radius: 10px;
   flex-shrink: 0;
 }
 
@@ -2451,7 +2456,8 @@
 .sticky-bar__thumb {
   width: 44px;
   height: 44px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 .sticky-bar__name {
@@ -2666,4 +2672,112 @@ details[open] .qv-modal__details-summary::after { content: '−'; }
   .qv-modal__img-side { border-radius: var(--radius-lg) var(--radius-lg) 0 0; min-height: 240px; }
   .qv-modal__info-side { padding: 24px; }
   .gallery__lb-nav { display: none; }
+}
+
+/* ============================================================
+   FOOD MOMENT — lifestyle shot between hero and ticker
+   ============================================================ */
+.food-moment {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  min-height: 65vh;
+  overflow: hidden;
+}
+
+.food-moment__img-side {
+  position: relative;
+  overflow: hidden;
+}
+
+.food-moment__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 7s ease;
+}
+
+.food-moment:hover .food-moment__img {
+  transform: scale(1.05);
+}
+
+.food-moment__text-side {
+  background: var(--color-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+  gap: 1.4rem;
+}
+
+.food-moment__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 800;
+  color: var(--color-cream);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.food-moment__sub {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 800;
+  color: var(--color-fire);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.food-moment__desc {
+  font-size: 1rem;
+  color: rgba(253, 246, 236, 0.65);
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+@media (max-width: 767px) {
+  .food-moment {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .food-moment__img-side {
+    height: 60vw;
+    min-height: 260px;
+  }
+  .food-moment__text-side {
+    padding: 2.5rem 1.5rem;
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-moment__img { transition: none; }
+}
+
+/* ============================================================
+   PRODUCT CARD — hover food image reveal
+   ============================================================ */
+.product-card__photo--hover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.product-card__img:hover .product-card__photo--hover {
+  opacity: 1;
+}
+
+/* Keep badge and QV button above the hover image */
+.product-card__badge { z-index: 4; }
+.product-card__qv-btn { z-index: 5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card__photo--hover { transition: none; }
 }
