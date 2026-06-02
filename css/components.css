@@ -932,6 +932,56 @@
 
 
 /* ============================================================
+   SECTION FOOD DECO — bookend food photography
+   ============================================================ */
+.section-deco {
+  position: absolute;
+  top: 0;
+  width: 28%;
+  max-width: 340px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.section-deco--left {
+  left: 0;
+  opacity: 0.18;
+  mask-image: linear-gradient(to right, black 0%, black 35%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 35%, transparent 100%);
+  filter: saturate(1.3) brightness(0.9);
+}
+
+.section-deco--right {
+  right: 0;
+  opacity: 0.18;
+  mask-image: linear-gradient(to left, black 0%, black 35%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 0%, black 35%, transparent 100%);
+  filter: saturate(1.3) brightness(0.9);
+}
+
+/* Sections hosting decos must be positioned */
+.newsletter,
+.promise {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Inner content stays above decos */
+.newsletter .container,
+.promise .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .section-deco { display: none; }
+}
+
+/* ============================================================
    NEWSLETTER
    ============================================================ */
 .newsletter {
@@ -1302,7 +1352,8 @@
 .hero-cx__pack {
   position: absolute;
   background: transparent;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: 20px;
   transition:
     left      750ms cubic-bezier(0.25, 1, 0.5, 1),
     bottom    750ms cubic-bezier(0.25, 1, 0.5, 1),
@@ -1317,12 +1368,11 @@
 .hero-cx__pack-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
+  object-fit: cover;
+  object-position: center;
   pointer-events: none;
   user-select: none;
   display: block;
-  border-radius: 16px;
 }
 
 /* === CLASSIC PACK === */
@@ -1330,11 +1380,11 @@
 .hero-cx__pack--classic {
   left: 50%;
   bottom: 0;
-  width: 70%;
-  max-width: 760px;
+  width: 52%;
+  max-width: 570px;
   height: 100%;
   transform: translateX(-50%) rotate(-2deg);
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,.65));
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.55));
   opacity: 1;
   z-index: 20;
 }
@@ -1342,9 +1392,9 @@
 .hero-cx[data-flavor="spicy"] .hero-cx__pack--classic {
   left: 22%;
   bottom: 8%;
-  width: 30%;
-  max-width: 280px;
-  height: 55%;
+  width: 22%;
+  max-width: 210px;
+  height: 42%;
   transform: translateX(-50%) rotate(8deg);
   filter: blur(2px) brightness(0.5);
   opacity: 0.45;
@@ -1357,9 +1407,9 @@
 .hero-cx__pack--spicy {
   left: 78%;
   bottom: 8%;
-  width: 30%;
-  max-width: 280px;
-  height: 55%;
+  width: 22%;
+  max-width: 210px;
+  height: 42%;
   transform: translateX(-50%) rotate(-8deg);
   filter: blur(2px) brightness(0.5);
   opacity: 0.45;
@@ -1370,11 +1420,11 @@
 .hero-cx[data-flavor="spicy"] .hero-cx__pack--spicy {
   left: 50%;
   bottom: 0;
-  width: 70%;
-  max-width: 760px;
+  width: 52%;
+  max-width: 570px;
   height: 100%;
   transform: translateX(-50%) rotate(2deg);
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,.65));
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.55));
   opacity: 1;
   z-index: 20;
   cursor: default;
@@ -1565,30 +1615,30 @@
 
 @media (max-width: 639px) {
   .hero-cx__pack--classic {
-    width: 90%;
-    height: 72%;
+    width: 68%;
+    height: 54%;
     bottom: 22%;
     max-width: none;
   }
   .hero-cx__pack--spicy {
     left: 84%;
-    height: 36%;
+    height: 27%;
     bottom: 28%;
-    width: 52%;
+    width: 39%;
     max-width: none;
   }
   .hero-cx[data-flavor="spicy"] .hero-cx__pack--spicy {
-    width: 90%;
-    height: 72%;
+    width: 68%;
+    height: 54%;
     bottom: 22%;
     left: 50%;
     max-width: none;
   }
   .hero-cx[data-flavor="spicy"] .hero-cx__pack--classic {
     left: 16%;
-    height: 36%;
+    height: 27%;
     bottom: 28%;
-    width: 52%;
+    width: 39%;
     max-width: none;
   }
   .hero-cx__meta-strip { display: none; }
