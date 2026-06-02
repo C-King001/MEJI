@@ -1352,8 +1352,7 @@
 .hero-cx__pack {
   position: absolute;
   background: transparent;
-  overflow: hidden;
-  border-radius: 20px;
+  overflow: visible;
   transition:
     left      750ms cubic-bezier(0.25, 1, 0.5, 1),
     bottom    750ms cubic-bezier(0.25, 1, 0.5, 1),
@@ -1368,8 +1367,8 @@
 .hero-cx__pack-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   pointer-events: none;
   user-select: none;
   display: block;
@@ -1380,11 +1379,11 @@
 .hero-cx__pack--classic {
   left: 50%;
   bottom: 0;
-  width: 52%;
-  max-width: 570px;
+  width: 44%;
+  max-width: 500px;
   height: 100%;
   transform: translateX(-50%) rotate(-2deg);
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,.55));
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,.65));
   opacity: 1;
   z-index: 20;
 }
@@ -1420,11 +1419,11 @@
 .hero-cx[data-flavor="spicy"] .hero-cx__pack--spicy {
   left: 50%;
   bottom: 0;
-  width: 52%;
-  max-width: 570px;
+  width: 44%;
+  max-width: 500px;
   height: 100%;
   transform: translateX(-50%) rotate(2deg);
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,.55));
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,.65));
   opacity: 1;
   z-index: 20;
   cursor: default;
@@ -1615,30 +1614,30 @@
 
 @media (max-width: 639px) {
   .hero-cx__pack--classic {
-    width: 68%;
-    height: 54%;
+    width: 60%;
+    height: 55%;
     bottom: 22%;
     max-width: none;
   }
   .hero-cx__pack--spicy {
     left: 84%;
-    height: 27%;
+    height: 28%;
     bottom: 28%;
-    width: 39%;
+    width: 38%;
     max-width: none;
   }
   .hero-cx[data-flavor="spicy"] .hero-cx__pack--spicy {
-    width: 68%;
-    height: 54%;
+    width: 60%;
+    height: 55%;
     bottom: 22%;
     left: 50%;
     max-width: none;
   }
   .hero-cx[data-flavor="spicy"] .hero-cx__pack--classic {
     left: 16%;
-    height: 27%;
+    height: 28%;
     bottom: 28%;
-    width: 39%;
+    width: 38%;
     max-width: none;
   }
   .hero-cx__meta-strip { display: none; }
@@ -2005,8 +2004,8 @@
 .bundle__product-img {
   width: 64px;
   height: 64px;
-  object-fit: cover;
-  border-radius: 10px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
   flex-shrink: 0;
 }
 
@@ -2506,8 +2505,7 @@
 .sticky-bar__thumb {
   width: 44px;
   height: 44px;
-  object-fit: cover;
-  border-radius: 8px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 .sticky-bar__name {
