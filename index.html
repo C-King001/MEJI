@@ -13,6 +13,12 @@
 </head>
 <body>
 
+  <!-- Scroll progress indicator -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Cursor spotlight -->
+  <div id="cursor-spotlight" class="cursor-spotlight" aria-hidden="true"></div>
+
   <!-- ===== CART DRAWER ===== -->
   <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
   <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart" role="complementary">
@@ -28,6 +34,13 @@
       <a href="#products" class="btn btn--fire" onclick="closeCart()">Shop Now</a>
     </div>
     <div id="cart-footer" class="cart-drawer__footer">
+      <!-- Free shipping progress bar -->
+      <div class="shipping-bar" id="shipping-bar" aria-live="polite" aria-atomic="true">
+        <p class="shipping-bar__text" id="shipping-bar-text">Add £25.00 more for FREE delivery</p>
+        <div class="shipping-bar__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="shipping-progress">
+          <div class="shipping-bar__fill" id="shipping-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
       <div class="cart-drawer__subtotal">
         <span>Subtotal</span>
         <span id="cart-total">£0.00</span>
@@ -62,95 +75,130 @@
     </div>
   </nav>
 
-  <!-- ===== HERO CAROUSEL ===== -->
-  <section class="hero-cx" id="home">
+  <!-- ===== HERO — IMMERSIVE 2-FLAVOR STAGE ===== -->
+  <section class="hero-cx" id="home" data-flavor="classic">
 
-    <!-- Grain texture -->
+    <!-- Grain texture overlay -->
     <div class="hero-cx__grain" aria-hidden="true"></div>
 
-    <!-- Floating background word -->
-    <div class="hero-cx__bg-word" aria-hidden="true">JOLLOF</div>
+    <!-- Atmospheric color glow behind the product -->
+    <div class="hero-cx__glow" id="hero-glow" aria-hidden="true"></div>
 
-    <!-- Product pack carousel stage -->
-    <div class="hero-cx__stage">
-      <div class="hero-cx__pack hero-cx__pack--center" data-index="0">
-        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/1.02464a56.png" alt="Classic Chicken Jollof" class="hero-cx__pack-img" draggable="false" />
+    <!-- Giant background word — changes with flavor -->
+    <div class="hero-cx__bg-word" id="hero-bg-word" aria-hidden="true">JOLLOF</div>
+
+    <!-- Product image stage -->
+    <div class="hero-cx__stage" id="hero-stage">
+
+      <div class="hero-cx__pack hero-cx__pack--classic" id="pack-classic" data-flavor="classic">
+        <img src="assets/product images/Jollof_flavor-removebg-preview.png" alt="Classic Chicken Jollof Rice — Meji Foods" class="hero-cx__pack-img" draggable="false" />
       </div>
-      <div class="hero-cx__pack hero-cx__pack--right" data-index="1">
-        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/2.b977faab.png" alt="Fiery Hot Spicy Jollof" class="hero-cx__pack-img" draggable="false" />
+
+      <div class="hero-cx__pack hero-cx__pack--spicy" id="pack-spicy" data-flavor="spicy">
+        <img src="assets/product images/Spicy_Flavor-removebg-preview.png" alt="Fiery Hot Spicy Jollof Rice — Meji Foods" class="hero-cx__pack-img" draggable="false" />
       </div>
-      <div class="hero-cx__pack hero-cx__pack--back" data-index="2">
-        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/3.4df853b4.png" alt="Authentic Vegan Jollof" class="hero-cx__pack-img" draggable="false" />
-      </div>
-      <div class="hero-cx__pack hero-cx__pack--left" data-index="3">
-        <img src="https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/4.4457fbce.png" alt="Smoked Suya Jollof" class="hero-cx__pack-img" draggable="false" />
-      </div>
+
     </div>
 
-    <!-- Bottom: info panel + CTA -->
+    <!-- Bottom info panel + CTA -->
     <div class="hero-cx__bottom">
 
       <div class="hero-cx__panel">
-        <div class="hero-cx__panel-top">
-          <h2 class="hero-cx__name">CLASSIC CHICKEN JOLLOF</h2>
-          <span class="hero-cx__price">£5.99</span>
+        <div class="hero-cx__live-badge">
+          <span class="hero-cx__live-dot" aria-hidden="true"></span>
+          90 SECONDS FLAT
         </div>
-        <p class="hero-cx__desc">Rich, deeply smoky, and packed with traditional West African aromatics. Crafted with authentic seasonings—ready in 90 seconds flat.</p>
-        <div class="hero-cx__nav">
-          <button class="hero-cx__nav-btn" id="hero-prev" aria-label="Previous flavor">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
-          </button>
-          <button class="hero-cx__nav-btn" id="hero-next" aria-label="Next flavor">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        <div class="hero-cx__panel-top">
+          <h2 class="hero-cx__name" id="hero-name">CLASSIC CHICKEN JOLLOF</h2>
+          <span class="hero-cx__price" id="hero-price">£5.99</span>
+        </div>
+        <p class="hero-cx__desc" id="hero-desc">Rich, deeply smoky, and packed with traditional West African aromatics. Crafted with authentic seasonings — ready in 90 seconds flat.</p>
+        <div class="hero-cx__flavor-tabs">
+          <button class="hero-cx__tab hero-cx__tab--active" id="tab-classic" data-flavor="classic">Classic</button>
+          <button class="hero-cx__tab" id="tab-spicy" data-flavor="spicy">
+            <span aria-hidden="true">🔥</span> Fiery Spicy
           </button>
         </div>
       </div>
 
       <div class="hero-cx__cta-wrap">
         <a href="#products" class="hero-cx__cta-btn">
-          SECURE YOUR PACK
+          ORDER NOW
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
     </div>
 
+    <!-- Bottom bar metadata strip -->
+    <div class="hero-cx__meta-strip">
+      <span>PREMIUM WEST AFRICAN GRAINS</span>
+      <span class="hero-cx__meta-price" id="hero-meta-price">£5.99 / PACK</span>
+    </div>
+
   </section>
 
-  <!-- ===== AS SEEN IN ===== -->
-  <section class="seen-in">
-    <div class="container">
-      <p class="seen-in__label">As seen in</p>
-      <div class="seen-in__marquee">
-        <div class="seen-in__track">
-          <span class="seen-in__logo">Sainsbury's</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Amazon</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">TikTok Shop</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Saveways</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Ades</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Abiglobal</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">FoundHer Circle</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Sainsbury's</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Amazon</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">TikTok Shop</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Saveways</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Ades</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">Abiglobal</span>
-          <span class="seen-in__sep">·</span>
-          <span class="seen-in__logo">FoundHer Circle</span>
-          <span class="seen-in__sep">·</span>
+  <!-- ===== PARTNER TICKER ===== -->
+  <section class="seen-in" aria-label="Retail partners">
+    <p class="seen-in__label">Trusted by</p>
+    <div class="seen-in__marquee">
+      <div class="seen-in__track" id="ticker-track">
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <span class="seen-in__logo-text">Sainsbury's</span>
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <img src="assets/images/AMazon logo.png" alt="Amazon" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <img src="assets/images/TikTok SHop Logo.jfif" alt="TikTok Shop" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <img src="assets/images/saveways_logo.png" alt="Saveways" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <img src="assets/images/Ades Logo.jpg" alt="Ades" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <img src="assets/images/Abiglobal logo.jpg" alt="Abiglobal" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item">
+          <span class="seen-in__dot" aria-hidden="true"></span>
+          <span class="seen-in__logo-text">FoundHer Circle</span>
+        </div>
+        <!-- Duplicate set for seamless infinite loop -->
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <span class="seen-in__logo-text">Sainsbury's</span>
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <img src="assets/images/AMazon logo.png" alt="" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <img src="assets/images/TikTok SHop Logo.jfif" alt="" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <img src="assets/images/saveways_logo.png" alt="" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <img src="assets/images/Ades Logo.jpg" alt="" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <img src="assets/images/Abiglobal logo.jpg" alt="" class="seen-in__logo-img" />
+        </div>
+        <div class="seen-in__item" aria-hidden="true">
+          <span class="seen-in__dot"></span>
+          <span class="seen-in__logo-text">FoundHer Circle</span>
         </div>
       </div>
     </div>
@@ -170,15 +218,20 @@
           <div class="product-card__img">
             <img src="assets/images/Jollof flavor.jpeg" alt="Meji Jollof Rice — Chicken" class="product-card__photo" />
             <span class="product-card__badge">Bestseller</span>
+            <button class="product-card__qv-btn" data-qv="meji-jollof-chicken" aria-label="Quick view Jollof Rice Chicken">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              Quick View
+            </button>
           </div>
           <div class="product-card__body">
             <h3 class="product-card__name">Jollof Rice — Chicken</h3>
-            <p class="product-card__desc">Rich, smoky, and deeply satisfying. Our original recipe with tender chicken pieces.</p>
+            <p class="product-card__desc">Smoky tomato richness with tender chicken and the unmistakable depth of authentic West African jollof. Crafted from a generations-old recipe.</p>
             <div class="product-card__meta">
               <ul class="product-card__tags">
-                <li>600g</li>
+                <li>250g</li>
                 <li>90 sec</li>
                 <li>Gluten-free</li>
+                <li class="product-card__tag--sainsbury">Stocked in Sainsbury's</li>
               </ul>
             </div>
             <div class="product-card__footer">
@@ -193,17 +246,22 @@
 
         <div class="product-card fade-up">
           <div class="product-card__img">
-            <img src="assets/images/Spicy Flavor.webp" alt="Meji Jollof Rice — Spicy" class="product-card__photo" />
+            <img src="assets/images/Spicy Flavor.webp" alt="Meji Jollof Rice — Vegetarian" class="product-card__photo" />
             <span class="product-card__badge product-card__badge--green">Vegan</span>
+            <button class="product-card__qv-btn" data-qv="meji-jollof-veg" aria-label="Quick view Jollof Rice Vegetarian">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              Quick View
+            </button>
           </div>
           <div class="product-card__body">
             <h3 class="product-card__name">Jollof Rice — Vegetarian</h3>
-            <p class="product-card__desc">All the boldness of classic Jollof — plant-based, no compromise on that famous smoky depth.</p>
+            <p class="product-card__desc">All the boldness of classic Jollof — smoky, rich, deeply aromatic. 100% plant-based with zero compromise on that famous West African depth.</p>
             <div class="product-card__meta">
               <ul class="product-card__tags">
-                <li>600g</li>
+                <li>250g</li>
                 <li>90 sec</li>
-                <li>Plant-based</li>
+                <li>Vegan</li>
+                <li class="product-card__tag--sainsbury">Stocked in Sainsbury's</li>
               </ul>
             </div>
             <div class="product-card__footer">
@@ -234,6 +292,97 @@
     </div>
   </section>
 
+  <!-- ===== BUNDLE BUILDER ===== -->
+  <section class="bundle" id="bundle">
+    <div class="container">
+      <div class="bundle__inner fade-up">
+        <div class="bundle__header">
+          <span class="section-eyebrow">Bundle &amp; Save</span>
+          <h2 class="section-title">Build Your Box</h2>
+          <p class="section-sub">Mix 6 packs and save 15%. Try both flavours or double down on your favourite.</p>
+        </div>
+        <div class="bundle__builder">
+          <div class="bundle__row">
+            <div class="bundle__product">
+              <img src="assets/product images/Jollof_flavor-removebg-preview.png" alt="" class="bundle__product-img" aria-hidden="true" />
+              <div class="bundle__product-info">
+                <span class="bundle__product-name">Jollof Rice — Chicken</span>
+                <span class="bundle__product-price">£5.99 / pack</span>
+              </div>
+            </div>
+            <div class="bundle__stepper" role="group" aria-label="Chicken quantity">
+              <button class="bundle__step" data-target="bundle-chicken" data-dir="-1" aria-label="Remove one Chicken pack">−</button>
+              <output class="bundle__qty" id="bundle-chicken" aria-live="polite">0</output>
+              <button class="bundle__step" data-target="bundle-chicken" data-dir="1" aria-label="Add one Chicken pack">+</button>
+            </div>
+          </div>
+          <div class="bundle__row">
+            <div class="bundle__product">
+              <img src="assets/product images/Spicy_Flavor-removebg-preview.png" alt="" class="bundle__product-img" aria-hidden="true" />
+              <div class="bundle__product-info">
+                <span class="bundle__product-name">Jollof Rice — Spicy</span>
+                <span class="bundle__product-price">£5.49 / pack</span>
+              </div>
+            </div>
+            <div class="bundle__stepper" role="group" aria-label="Spicy quantity">
+              <button class="bundle__step" data-target="bundle-spicy" data-dir="-1" aria-label="Remove one Spicy pack">−</button>
+              <output class="bundle__qty" id="bundle-spicy" aria-live="polite">0</output>
+              <button class="bundle__step" data-target="bundle-spicy" data-dir="1" aria-label="Add one Spicy pack">+</button>
+            </div>
+          </div>
+          <div class="bundle__summary">
+            <div class="bundle__count-wrap">
+              <span class="bundle__count-label"><output id="bundle-total-packs" aria-live="polite">0</output> / 6 packs selected</span>
+              <div class="bundle__progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="bundle-progress-bar">
+                <div class="bundle__progress-fill" id="bundle-progress-fill" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="bundle__pricing-wrap">
+              <span class="bundle__price-original" id="bundle-price-original" hidden></span>
+              <span class="bundle__price-final" id="bundle-price-final">£0.00</span>
+              <span class="bundle__saving-badge" id="bundle-saving" hidden>15% OFF</span>
+            </div>
+          </div>
+          <button class="btn btn--fire btn--full bundle__cta" id="bundle-add-btn" disabled aria-disabled="true">
+            Add 6 packs to unlock the deal
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="hiw">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-eyebrow">Effortless</span>
+        <h2 class="section-title">Ready in 3 Steps</h2>
+      </div>
+      <div class="hiw__steps">
+        <div class="hiw__step fade-up">
+          <div class="hiw__step-num" aria-hidden="true">01</div>
+          <div class="hiw__step-icon" aria-hidden="true">📦</div>
+          <h3 class="hiw__step-title">Open the pack</h3>
+          <p class="hiw__step-text">Tear open, place in the microwave. No prep, no mess, no waiting.</p>
+        </div>
+        <div class="hiw__connector" aria-hidden="true"></div>
+        <div class="hiw__step fade-up">
+          <div class="hiw__step-num" aria-hidden="true">02</div>
+          <div class="hiw__step-icon" aria-hidden="true">🔥</div>
+          <h3 class="hiw__step-title">Heat 90 seconds</h3>
+          <p class="hiw__step-text">90 seconds in the microwave. That's it. Genuinely.</p>
+        </div>
+        <div class="hiw__connector" aria-hidden="true"></div>
+        <div class="hiw__step fade-up">
+          <div class="hiw__step-num" aria-hidden="true">03</div>
+          <div class="hiw__step-icon" aria-hidden="true">🍚</div>
+          <h3 class="hiw__step-title">Taste authentic Jollof</h3>
+          <p class="hiw__step-text">Serve and eat. Genuine West African flavour, every single time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PROMISE ===== -->
   <section class="promise">
     <div class="container">
@@ -244,18 +393,18 @@
       <div class="promise__grid">
         <div class="promise__card fade-up">
           <div class="promise__icon">⚡</div>
-          <h3 class="promise__title">90 Seconds Flat</h3>
-          <p class="promise__text">Pack to plate, no faff. Designed for the real world — because hunger doesn't wait for a 45-minute cook time.</p>
+          <h3 class="promise__title">No More 45-Minute Cooking</h3>
+          <p class="promise__text">Your evenings back, instantly. From pack to plate in 90 seconds — because hunger isn't patient and neither are you.</p>
         </div>
         <div class="promise__card fade-up">
           <div class="promise__icon">🌍</div>
-          <h3 class="promise__title">Authentically West African</h3>
-          <p class="promise__text">Every grain infused with the warmth and richness of traditional Yoruba cooking. No shortcuts, no compromises.</p>
+          <h3 class="promise__title">Authentic Taste Every Time</h3>
+          <p class="promise__text">Every grain carries generations of West African cooking knowledge. The real thing — not an approximation of it.</p>
         </div>
         <div class="promise__card fade-up">
           <div class="promise__icon">🏙️</div>
-          <h3 class="promise__title">Made for Real Life</h3>
-          <p class="promise__text">Born in London, rooted in Lagos. Built for the diaspora, loved by everyone. Cultural food shouldn't be gatekept by time.</p>
+          <h3 class="promise__title">Your Emergency Meal Solution</h3>
+          <p class="promise__text">Long commute, short lunch break, zero energy left. Meji is always in your corner — cultural food made for real, busy lives.</p>
         </div>
       </div>
     </div>
@@ -278,8 +427,8 @@
             <span class="story__stat-label">Founded</span>
           </div>
           <div class="story__stat">
-            <span class="story__stat-num">140+</span>
-            <span class="story__stat-label">UK Stores</span>
+            <span class="story__stat-num">400+</span>
+            <span class="story__stat-label">UK Stockists</span>
           </div>
           <div class="story__stat">
             <span class="story__stat-num">100K+</span>
@@ -291,87 +440,102 @@
         <span class="section-eyebrow section-eyebrow--light">Our Story</span>
         <h2 class="story__title">Two Friends. One Craving. A Movement.</h2>
         <p class="story__text">
-          <strong>"Meji"</strong> means "two" in Yoruba — born from the vision of two friends who wanted one thing: the taste of home without the hours in the kitchen.
+          <strong>"Meji"</strong> means "two" in Yoruba — the name born from two friends sitting in a tiny London kitchen, both tired of choosing between authenticity and convenience.
         </p>
         <p class="story__text">
-          Founder Stephanie Olubajo left a career at Boston Consulting Group to build something that mattered. She saw what millions of busy West Africans in the diaspora felt every day — that craving for authentic jollof, but no time to make it.
+          Stephanie Olubajo walked away from a career at Boston Consulting Group to answer a question no one else was solving: why should the diaspora have to choose between authentic West African food and a real life?
         </p>
         <p class="story__text">
-          Her answer wasn't to compromise. It was to obsess over every grain, every spice, every second — until she had a 90-second Jollof Rice that tasted like it took 90 minutes.
+          She spent months testing, tasting, and obsessing over every grain and spice — until she had something that tasted like her mum's Sunday pot, ready in 90 seconds flat. Now stocked in 400+ stores across the UK.
         </p>
         <blockquote class="story__quote">
           "Cultural food shouldn't be gatekept by time."
-          <cite>— Stephanie Olubajo, Founder</cite>
+          <cite>— Stephanie Olubajo, Founder & CEO</cite>
         </blockquote>
         <a href="https://www.linkedin.com/in/stephanie-olubajo-851b5783/" target="_blank" rel="noopener" class="btn btn--outline-light">Meet Stephanie →</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== TESTIMONIALS ===== -->
-  <section class="testimonials">
+
+  <!-- ===== GALLERY — MEJI IN THE WILD ===== -->
+  <section class="gallery" id="gallery">
     <div class="container">
       <div class="section-header fade-up">
-        <span class="section-eyebrow">Reviews</span>
-        <h2 class="section-title">The People Have Spoken</h2>
+        <span class="section-eyebrow">In the Wild</span>
+        <h2 class="section-title">Meji in the Wild</h2>
+        <p class="section-sub">From high street shelves to real hands — no staging, no filters.</p>
       </div>
-      <div class="testimonials__grid">
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__text">"I've tried every brand out there. Meji is the only one that actually tastes like my mum's cooking. I order 6 packs at a time now."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">A</div>
-            <div>
-              <strong>Adaeze O.</strong>
-              <span>London</span>
-            </div>
+      <div class="gallery__filters fade-up" role="group" aria-label="Filter gallery by category">
+        <button class="gallery__filter gallery__filter--active" data-filter="all" aria-pressed="true">All</button>
+        <button class="gallery__filter" data-filter="in-stores" aria-pressed="false">In Stores</button>
+        <button class="gallery__filter" data-filter="in-hands" aria-pressed="false">In Hands</button>
+        <button class="gallery__filter" data-filter="at-events" aria-pressed="false">At Events</button>
+      </div>
+      <div class="gallery__grid" id="gallery-grid">
+        <button class="gallery__tile gallery__tile--tall" data-bucket="in-hands" data-index="0" aria-label="Open image: Idris Elba trying Meji">
+          <img src="assets/images/Idris Elba Trying it out.jpg" alt="Idris Elba trying Meji" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">Idris Elba trying Meji</span>
           </div>
-        </div>
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__text">"As someone who's not West African, this genuinely converted me. The smoky flavour is unlike anything I've had. It's on my weekly shop now."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar" style="background:#1F4A2C;">J</div>
-            <div>
-              <strong>James P.</strong>
-              <span>Manchester</span>
-            </div>
+        </button>
+        <button class="gallery__tile" data-bucket="in-hands" data-index="1" aria-label="Open image: A customer with Meji">
+          <img src="assets/images/In thehand of a customer.jpeg" alt="A customer with Meji" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">A customer with Meji</span>
           </div>
-        </div>
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__text">"90 seconds honestly sounds like a gimmick until you try it. This is real food. My kids demolished the whole pack in minutes. Thank you Meji."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar" style="background:#f5a41f; color:#1a1208;">F</div>
-            <div>
-              <strong>Fatima K.</strong>
-              <span>Birmingham</span>
-            </div>
+        </button>
+        <button class="gallery__tile" data-bucket="at-events" data-index="2" aria-label="Open image: Meji at a showcase">
+          <img src="assets/images/At an event showcasing meji.jpg" alt="Meji at a showcase" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">Meji at a showcase</span>
           </div>
-        </div>
+        </button>
+        <button class="gallery__tile" data-bucket="in-stores" data-index="3" aria-label="Open image: Meji on shelf at Sainsbury's">
+          <img src="assets/images/At Sainsbury.jpeg" alt="Meji on shelf at Sainsbury's" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">On shelf at Sainsbury's</span>
+            <span class="gallery__tile-tag">Found in 400+ stores</span>
+          </div>
+        </button>
+        <button class="gallery__tile" data-bucket="in-hands" data-index="4" aria-label="Open image: Meji Foods">
+          <img src="assets/images/Another nice image.jpg" alt="Meji Foods" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">Meji Foods</span>
+          </div>
+        </button>
+        <button class="gallery__tile gallery__tile--wide" data-bucket="in-stores" data-index="5" aria-label="Open image: Meji on shelf at Sainsbury's">
+          <img src="assets/images/At another sainsbury.jpeg" alt="Meji on shelf at Sainsbury's" class="gallery__tile-img" loading="lazy" />
+          <div class="gallery__tile-overlay" aria-hidden="true">
+            <span class="gallery__tile-caption">On shelf at Sainsbury's</span>
+            <span class="gallery__tile-tag">Found in 400+ stores</span>
+          </div>
+        </button>
+      </div>
+      <div class="gallery__cta fade-up">
+        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="btn btn--outline gallery__ig-btn">
+          Follow @mejifoods on Instagram
+        </a>
       </div>
     </div>
-  </section>
 
-  <!-- ===== CELEBRITY MOMENT ===== -->
-  <section class="celeb">
-    <div class="container">
-      <div class="celeb__inner fade-up">
-        <div class="celeb__photo-wrap">
-          <img
-            src="assets/images/Idris Elba Trying it out.jpg"
-            alt="Idris Elba trying Meji Foods"
-            class="celeb__photo"
-          />
-          <div class="celeb__label">📸 Spotted</div>
-        </div>
-        <div class="celeb__content">
-          <span class="section-eyebrow">In Good Company</span>
-          <h2 class="celeb__title">Even Idris Elba<br />can't resist Meji.</h2>
-          <p class="celeb__text">When you're stocked in 140+ Sainsbury's stores and word gets around, it reaches everyone. Meji is the Jollof Rice the whole country is talking about.</p>
-          <a href="#products" class="btn btn--fire">Get Yours Now</a>
-        </div>
+    <!-- Lightbox overlay -->
+    <div class="gallery__lb-overlay" id="lb-overlay" aria-hidden="true"></div>
+    <!-- Lightbox dialog -->
+    <div class="gallery__lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+      <button class="gallery__lb-close" id="lb-close" aria-label="Close image viewer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="gallery__lb-nav gallery__lb-prev" id="lb-prev" aria-label="Previous image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="gallery__lb-content">
+        <img src="" alt="" id="lb-img" class="gallery__lb-img" />
+        <p class="gallery__lb-caption" id="lb-caption"></p>
       </div>
+      <button class="gallery__lb-nav gallery__lb-next" id="lb-next" aria-label="Next image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </section>
 
@@ -392,7 +556,7 @@
               <text x="70" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-size="14" font-weight="700" fill="white">Sainsbury's</text>
             </svg>
           </div>
-          <p>140+ stores nationwide</p>
+          <p>400+ stockists nationwide</p>
           <span class="stockist-card__cta">Find a store →</span>
         </a>
 
@@ -448,6 +612,32 @@
         <h2 class="section-title">From Pack to Plate<br />in 90 Seconds</h2>
         <p class="section-sub">Watch the magic happen. Real food, real fast.</p>
       </div>
+      <!-- Pack → Heat → Plate sequence -->
+      <div class="videos__sequence fade-up" aria-label="Three steps: Pack, Heat, Plate">
+        <div class="videos__seq-step" data-seq="1">
+          <div class="videos__seq-icon" aria-hidden="true">📦</div>
+          <div class="videos__seq-label">Pack</div>
+        </div>
+        <div class="videos__seq-arrow" aria-hidden="true">
+          <svg width="36" height="16" viewBox="0 0 36 16" fill="none"><path d="M0 8H32M26 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="videos__seq-step" data-seq="2">
+          <div class="videos__seq-icon" aria-hidden="true">🔥</div>
+          <div class="videos__seq-label">Heat</div>
+        </div>
+        <div class="videos__seq-arrow" aria-hidden="true">
+          <svg width="36" height="16" viewBox="0 0 36 16" fill="none"><path d="M0 8H32M26 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="videos__seq-step" data-seq="3">
+          <div class="videos__seq-icon" aria-hidden="true">🍽️</div>
+          <div class="videos__seq-label">Plate</div>
+        </div>
+        <div class="videos__seq-timer" aria-label="Ready in 90 seconds">
+          <span class="videos__seq-timer-num" aria-hidden="true">90</span>
+          <span class="videos__seq-timer-unit" aria-hidden="true">sec</span>
+        </div>
+      </div>
+
       <div class="videos__wrap fade-up">
         <video
           class="videos__player"
@@ -464,58 +654,15 @@
           </button>
         </div>
       </div>
-      <div class="videos__event-row fade-up">
-        <img src="assets/images/At an event showcasing meji.jpg" alt="Meji Foods at a showcase event" class="videos__event-img" />
-        <img src="assets/images/At Sainsbury.jpeg" alt="Meji Foods in Sainsbury's" class="videos__event-img" />
-        <img src="assets/images/At another sainsbury.jpeg" alt="Meji Foods in Sainsbury's" class="videos__event-img" />
-      </div>
     </div>
   </section>
 
-  <!-- ===== INSTAGRAM ===== -->
-  <section class="instagram">
-    <div class="container">
-      <div class="instagram__header fade-up">
-        <div>
-          <span class="section-eyebrow">Follow Along</span>
-          <h2 class="section-title">@mejifoods</h2>
-        </div>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="btn btn--outline">Follow on Instagram</a>
-      </div>
-      <div class="instagram__grid fade-up">
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Meji at an event">
-          <img src="assets/images/At an event showcasing meji.jpg" alt="Meji at an event" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Idris Elba trying Meji">
-          <img src="assets/images/Idris Elba Trying it out.jpg" alt="Idris Elba trying Meji Foods" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Meji in a customer's hands">
-          <img src="assets/images/In thehand of a customer.jpeg" alt="Meji in a customer's hands" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Meji at Sainsbury's">
-          <img src="assets/images/At Sainsbury.jpeg" alt="Meji at Sainsbury's" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Meji at another Sainsbury's">
-          <img src="assets/images/At another sainsbury.jpeg" alt="Meji at Sainsbury's" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-        <a href="https://www.instagram.com/mejifoods" target="_blank" rel="noopener" class="ig-tile" aria-label="Another Meji moment">
-          <img src="assets/images/Another nice image.jpg" alt="Meji Foods" class="ig-tile__img" />
-          <div class="ig-tile__overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17 2H7C4.239 2 2 4.239 2 7v10c0 2.761 2.239 5 5 5h10c2.761 0 5-2.239 5-5V7c0-2.761-2.239-5-5-5zm3 15c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10c1.654 0 3 1.346 3 3v10zm-8-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm4-7c-.553 0-1 .447-1 1s.447 1 1 1 1-.447 1-1-.447-1-1-1z"/></svg></div>
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== NEWSLETTER ===== -->
   <section class="newsletter" id="newsletter">
     <div class="container">
       <div class="newsletter__inner fade-up">
-        <span class="newsletter__icon">🌶️</span>
+        <span class="newsletter__icon" aria-hidden="true">🌶️</span>
         <h2 class="newsletter__title">Get recipes, restocks &amp; real talk</h2>
         <p class="newsletter__sub">Be first to know when new flavours drop. No spam — just good food, straight to your inbox.</p>
         <form class="newsletter__form" id="newsletter-form" novalidate>
@@ -588,6 +735,64 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===== STICKY ADD-TO-CART BAR ===== -->
+  <div class="sticky-bar" id="sticky-bar" aria-hidden="true">
+    <div class="container sticky-bar__inner">
+      <div class="sticky-bar__product">
+        <img src="assets/product images/Jollof_flavor-removebg-preview.png" alt="" class="sticky-bar__thumb" aria-hidden="true" />
+        <div>
+          <p class="sticky-bar__name">Jollof Rice — Chicken</p>
+          <p class="sticky-bar__price">£5.99</p>
+        </div>
+      </div>
+      <button class="btn btn--fire add-to-cart sticky-bar__btn"
+        data-id="meji-jollof-chicken"
+        data-name="Meji Jollof Rice — Chicken"
+        data-price="5.99"
+        tabindex="-1"
+        aria-label="Add Meji Jollof Rice Chicken to cart">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== QUICK VIEW MODAL ===== -->
+  <div class="qv-overlay" id="qv-overlay" aria-hidden="true"></div>
+  <div class="qv-modal" id="qv-modal" role="dialog" aria-modal="true" aria-label="Product quick view" hidden>
+    <button class="qv-modal__close" id="qv-close" aria-label="Close quick view">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="qv-modal__body">
+      <div class="qv-modal__img-side">
+        <img src="" alt="" id="qv-img" class="qv-modal__img" />
+      </div>
+      <div class="qv-modal__info-side">
+        <h3 class="qv-modal__name" id="qv-name"></h3>
+        <p class="qv-modal__desc" id="qv-desc"></p>
+        <div class="qv-modal__spice">
+          <span class="qv-modal__spice-label">Spice Level:</span>
+          <div class="qv-modal__spice-meter" id="qv-spice-meter" aria-label="Spice level indicator">
+            <span class="qv-chili" data-n="1" aria-hidden="true">🌶️</span>
+            <span class="qv-chili" data-n="2" aria-hidden="true">🌶️</span>
+            <span class="qv-chili" data-n="3" aria-hidden="true">🌶️</span>
+            <span class="qv-chili" data-n="4" aria-hidden="true">🌶️</span>
+            <span class="qv-chili" data-n="5" aria-hidden="true">🌶️</span>
+          </div>
+          <span class="qv-modal__spice-name" id="qv-spice-name"></span>
+        </div>
+        <details class="qv-modal__details">
+          <summary class="qv-modal__details-summary">Ingredients &amp; Nutrition</summary>
+          <div class="qv-modal__details-body" id="qv-nutrition"></div>
+        </details>
+        <div class="qv-modal__footer">
+          <span class="qv-modal__price" id="qv-price"></span>
+          <button class="btn btn--fire add-to-cart" id="qv-add"
+            data-id="" data-name="" data-price="">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>

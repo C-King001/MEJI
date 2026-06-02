@@ -62,6 +62,29 @@ function getCount(cart) {
   return cart.reduce((sum, i) => sum + i.qty, 0);
 }
 
+const FREE_SHIPPING_THRESHOLD = 25;
+
+function updateShippingBar() {
+  const cart     = loadCart();
+  const total    = getTotal(cart);
+  const textEl   = document.getElementById('shipping-bar-text');
+  const fillEl   = document.getElementById('shipping-bar-fill');
+  const trackEl  = document.getElementById('shipping-progress');
+  if (!textEl || !fillEl) return;
+
+  if (total >= FREE_SHIPPING_THRESHOLD) {
+    textEl.textContent = '🎉 You\'ve unlocked FREE delivery!';
+    fillEl.style.width = '100%';
+    if (trackEl) trackEl.setAttribute('aria-valuenow', '100');
+  } else {
+    const remaining = (FREE_SHIPPING_THRESHOLD - total).toFixed(2);
+    textEl.textContent = `Add £${remaining} more for FREE delivery`;
+    const pct = Math.round((total / FREE_SHIPPING_THRESHOLD) * 100);
+    fillEl.style.width = `${pct}%`;
+    if (trackEl) trackEl.setAttribute('aria-valuenow', String(pct));
+  }
+}
+
 function renderCart() {
   const cart = loadCart();
   const itemsEl   = document.getElementById('cart-items');
@@ -113,6 +136,8 @@ function renderCart() {
   if (totalEl) {
     totalEl.textContent = `£${getTotal(cart).toFixed(2)}`;
   }
+
+  updateShippingBar();
 }
 
 function openCart() {
